@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Payment;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-use App\Notifications\NotificationNotif;
-use App\Models\User;
+// use App\Notifications\NotificationNotif;
+// use App\Models\User;
 use App\Models\Orders;
 use App\Models\OrdersDetail;
-use Notification;
+// use Notification;
 
 class TripayController extends Controller
 {
@@ -190,10 +190,11 @@ class TripayController extends Controller
             }
             switch ($status) {
                 case 'PAID':
-                    $order->update([
-                        // 'transaction_reference' => $data->reference,
-                        'status' => 'Paid'
-                    ]);
+                    return 'OK';
+                    // $order->update([
+                    //     // 'transaction_reference' => $data->reference,
+                    //     'status' => 'Paid'
+                    // ]);
                     // $user = User::where('id',1)
                     //                 // ->orWhere('id',auth()->user()->id)
                     //                 ->get();
