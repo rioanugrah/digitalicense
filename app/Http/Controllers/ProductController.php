@@ -268,20 +268,20 @@ class ProductController extends Controller
             $product->update();
             $this->orders_detail->create($input2);
 
-            $user = \App\Models\User::where('id',1)
-                                    // ->orWhere('id',auth()->user()->id)
-                                    ->get();
-            $notif = [
-                'id' => $input['id'],
-                // 'url' => json_decode($paymentDetail)->data->checkout_url,
-                'url' => route('transactions.detail',['order_code' => $input['order_code']]),
-                'title' => 'Pesanan Baru',
-                'message' => 'Kode Order '.$input['order_code'].' - Sedang Melakukan Pembayaran',
-                'color_icon' => 'warning',
-                'icon' => 'bx bx-cube',
-                'publish' => Carbon::now(),
-            ];
-            Notification::send($user,new NotificationNotif($notif));
+            // $user = \App\Models\User::where('id',1)
+            //                         // ->orWhere('id',auth()->user()->id)
+            //                         ->get();
+            // $notif = [
+            //     'id' => $input['id'],
+            //     // 'url' => json_decode($paymentDetail)->data->checkout_url,
+            //     'url' => route('transactions.detail',['order_code' => $input['order_code']]),
+            //     'title' => 'Pesanan Baru',
+            //     'message' => 'Kode Order '.$input['order_code'].' - Sedang Melakukan Pembayaran',
+            //     'color_icon' => 'warning',
+            //     'icon' => 'bx bx-cube',
+            //     'publish' => Carbon::now(),
+            // ];
+            // Notification::send($user,new NotificationNotif($notif));
 
             return redirect(json_decode($paymentDetail)->data->checkout_url);
             // return response()->json([
