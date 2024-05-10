@@ -197,17 +197,18 @@ class TripayController extends Controller
                     // $user = User::where('id',1)
                     //                 // ->orWhere('id',auth()->user()->id)
                     //                 ->get();
-                    $user = auth()->user();
-                    $notif = [
-                        'id' => $input['id'],
-                        'url' => route('transactions.detail',['order_code' => $order->order_code]),
-                        'title' => 'Pesanan Baru',
-                        'message' => 'Kode Order '.$order->order_code.' - Berhasil Melakukan Pembayaran Sejumlah '.'Rp. '.number_format($order->price,0,',','.'),
-                        'color_icon' => 'success',
-                        'icon' => 'bx bx-check-circle',
-                        'publish' => Carbon::now(),
-                    ];
-                    Notification::send($user,new NotificationNotif($notif));
+                    // $user = auth()->user();
+                    // $notif = [
+                    //     'id' => $input['id'],
+                    //     'url' => route('transactions.detail',['order_code' => $order->order_code]),
+                    //     'title' => 'Pesanan Baru',
+                    //     'message' => 'Kode Order '.$order->order_code.' - Berhasil Melakukan Pembayaran Sejumlah '.'Rp. '.number_format($order->price,0,',','.'),
+                    //     'color_icon' => 'success',
+                    //     'icon' => 'bx bx-check-circle',
+                    //     'publish' => Carbon::now(),
+                    // ];
+                    // Notification::send($user,new NotificationNotif($notif));
+
                     // $notifMail = $this->sendMail;
                     // $notifMail->sendMail(
                     //     $transaction->status,$transaction->transaction_code,$transaction->transaction_price,
