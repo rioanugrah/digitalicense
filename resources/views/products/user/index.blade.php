@@ -52,6 +52,7 @@
                                     <h5 class="mb-3 text-truncate"><a href="{{ route('products.detail',['slug' => $product->slug, 'id' => $product->id]) }}" class="text-dark">
                                             {{ $product->name }} </a></h5>
                                     <h5 class="my-0"><span class="text-muted me-2">{{ 'Rp. '.number_format($product->price,0,',','.') }}</span></h5>
+                                    <h5 class="mt-1">Stock : <span>{{ $product->qty }}</span></h5>
                                 </div>
                             </div>
                         </div>

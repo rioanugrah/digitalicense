@@ -1,4 +1,7 @@
 @extends('layouts.backend.master')
+@section('title')
+    Transaction Detail {{ $order->order_code }}
+@endsection
 @section('content')
     <div class="row">
         <div class="col-lg-12">
@@ -97,7 +100,9 @@
                 </div>
                 <div class="card-footer">
                     <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+                    @if ($order->status == 'Unpaid')
                     <a href="{{ route('transactions.check_transaction',['order_code' => $order->order_code, 'order_reference' => $order->order_reference]) }}" class="btn btn-primary">Check Payment</a>
+                    @endif
                 </div>
             </div>
         </div>

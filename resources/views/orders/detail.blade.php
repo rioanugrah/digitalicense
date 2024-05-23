@@ -108,7 +108,10 @@
                             <tr>
                                 <td>{{ $order_detail->order_name }}</td>
                                 <td>:</td>
-                                <td>{!! $order_detail->product_license == null ? '<span class="badge bg-warning">Waiting</span>' : $order_detail->product_license !!}</td>
+                                <td>{!! $order_detail->product_license == null ? '-' : $order_detail->product_license !!}</td>
+                                @if (!empty($order_detail->product->link_file))
+                                <td><a href="{{ $order_detail->product->link_file }}" class="btn btn-primary"><i class="fas fa-download"></i> Download</a></td>
+                                @endif
                                 @if ($cek_user->role_id == 1)
                                 <td>
                                     <a href="#" class="btn btn-primary">Input License</a>

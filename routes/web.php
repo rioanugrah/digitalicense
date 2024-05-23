@@ -64,6 +64,11 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::post('simpan', [App\Http\Controllers\PermissionsController::class, 'simpan'])->name('permissions.simpan');
         });
 
+        Route::prefix('profile')->group(function () {
+            Route::get('/', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
+            Route::post('update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
+        });
+
         // Route::prefix('tripay')->group(function () {
         //     Route::get('/', [App\Http\Controllers\Payment\TripayController::class, 'getPayment']);
         // });

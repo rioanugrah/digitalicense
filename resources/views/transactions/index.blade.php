@@ -40,7 +40,7 @@
                                     <td class="text-center">{{ $key+1 }}</td>
                                     <td class="text-center">{{ $order->order_code }}</td>
                                     <td class="text-center">{{ $order->order_reference }}</td>
-                                    <td style="text-align: right">{{ 'Rp. '.number_format($order->price,0,',','.') }}</td>
+                                    <td class="text-center">{{ 'Rp. '.number_format($order->price,0,',','.') }}</td>
                                     <td class="text-center">
                                         @php
                                             switch ($order->status) {

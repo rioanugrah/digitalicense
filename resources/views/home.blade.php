@@ -41,5 +41,19 @@
             </div>
         </div>
     </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="card card-h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <span class="text-muted mb-3 lh-1 d-block text-truncate">Total Order</span>
+                        <h4 class="mb-3">
+                            <span class="counter-value" data-target="{{ $orders->count() }}">{{ $orders->count() }}</span>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection

@@ -86,7 +86,7 @@
                         <div class="d-flex flex-column h-100">
                             <div class="mb-4 mb-md-5 text-center">
                                 <a href="{{ url('/') }}" class="d-block auth-logo">
-                                    <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="28"> <span class="logo-txt">Dason</span>
+                                    <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="28"> <span class="logo-txt">Digital License</span>
                                 </a>
                             </div>
                             <div class="auth-content my-auto">
@@ -141,7 +141,7 @@
                                     </div>
                                 </form>
 
-                                <div class="mt-4 pt-2 text-center">
+                                {{-- <div class="mt-4 pt-2 text-center">
                                     <div class="signin-other-title">
                                         <h5 class="font-size-14 mb-3 text-muted fw-medium">- Sign in with -</h5>
                                     </div>
@@ -166,7 +166,7 @@
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> --}}
 
                                 <div class="mt-5 text-center">
                                     <p class="text-muted mb-0">Don't have an account ? <a href="{{ url('register') }}"
@@ -174,7 +174,7 @@
                                 </div>
                             </div>
                             <div class="mt-4 mt-md-5 text-center">
-                                <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Digital License. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesdesign</p>
+                                <p class="mb-0">© <script>document.write(new Date().getFullYear())</script> Digital License</p>
                             </div>
                         </div>
                     </div>

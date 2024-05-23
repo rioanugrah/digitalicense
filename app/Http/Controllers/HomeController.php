@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Orders;
 
 class HomeController extends Controller
 {
@@ -13,10 +14,12 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct(
-        Product $product
+        Product $product,
+        Orders $orders
     )
     {
         $this->product = $product;
+        $this->orders = $orders;
         // $this->middleware('auth');
     }
 
@@ -28,6 +31,7 @@ class HomeController extends Controller
     public function index()
     {
         $data['product'] = $this->product;
+        $data['orders'] = $this->orders->where('user_generate',auth()->user()->generate)->orWhere('user_generate','!=',auth()->user()->generate);
         return view('home',$data);
     }
 }

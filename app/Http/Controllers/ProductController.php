@@ -99,7 +99,12 @@ class ProductController extends Controller
             $input['image'] = time().'.webp';
             $img->save(public_path('product_digital/').$input['image']);
 
-            $input['link_file'] = $request->link_file;
+            if ($request->file('link_file')) {
+                $files = $request->file('link_file');
+                $namefile = $files->getClientOriginalName();
+                $files->move('product_digital/berkas/',$namefile);
+                $input['link_file'] = $namefile;
+            }
             $input['keywords'] = $request->keywords;
 
             $product = $this->product->create($input);
@@ -196,7 +201,16 @@ class ProductController extends Controller
                 $input['image'] = $input['image'];
             }
 
-            $input['link_file'] = $request->link_file;
+            if ($request->file('link_file')) {
+                $file_path = public_path('product_digital/berkas/'.$product->link_file);
+                File::delete($file_path);
+                $files = $request->file('link_file');
+                $namefile = $files->getClientOriginalName();
+                $files->move('product_digital/berkas/',$namefile);
+                $input['link_file'] = $namefile;
+            }
+
+            // $input['link_file'] = $request->link_file;
             $input['keywords'] = $request->keywords;
 
             $product->update($input);
@@ -217,6 +231,11 @@ class ProductController extends Controller
         if (empty($data['product'])) {
             return redirect()->back()->with(['error' => 'Data tidak ditemukan']);
         }
+
+        if ($data['product']['qty'] == 0) {
+            return redirect()->back()->with(['error' => 'Stock '.$data['product']['name'].' Telah habis']);
+        }
+
         $data['channels'] = json_decode($this->tripay_payment->getPayment())->data;
         // dd($data);
         return view('products.user.checkout',$data);
@@ -227,6 +246,9 @@ class ProductController extends Controller
         // dd($request->all());
         DB::beginTransaction();
         $product = $this->product->where('slug',$slug)->where('id',$id)->first();
+        if ($product->qty == 0) {
+            return redirect()->back()->with(['error' => 'Stock '.$data['product']['name'].' Telah habis']);
+        }
         $kode_jenis_transaksi = 'TRX';
         $kode_random_transaksi = Carbon::now()->format('Ym').rand(100,999);
         $input['id'] = Str::uuid()->toString();
@@ -256,6 +278,7 @@ class ProductController extends Controller
         $input2['id'] = Str::uuid()->toString();
         $input2['orders_id'] = $input['id'];
         $input2['order_name'] = $product->name;
+        $input2['product_id'] = $id;
         $input2['qty'] = 1;
         $input2['price'] = $input['price'];
         // dd($input2);
