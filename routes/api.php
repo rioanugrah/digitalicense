@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
-    Route::post('callback','Payment\TripayController@handle');
+    Route::post('callback',[App\Http\Controllers\Payment\TripayController::class, 'handle']);
+    // Route::post('callback','Payment\TripayController@handle');
+    Route::get('setwebhook',[App\Http\Controllers\BotTelegramController::class, 'setWebhook']);
+    Route::post('webhook',[App\Http\Controllers\BotTelegramController::class, 'commandHandlerWebHook']);
 });
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
