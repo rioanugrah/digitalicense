@@ -110,7 +110,7 @@
                                 <td>:</td>
                                 <td>{!! $order_detail->product_license == null ? '-' : $order_detail->product_license !!}</td>
                                 @if (!empty($order_detail->product->link_file))
-                                <td><a href="{{ $order_detail->product->link_file }}" class="btn btn-primary"><i class="fas fa-download"></i> Download</a></td>
+                                <td><a href="{{ asset('product_digital/berkas/'.$order_detail->product->link_file) }}" class="btn btn-primary"><i class="fas fa-download"></i> Download</a></td>
                                 @endif
                                 @if ($cek_user->role_id == 1)
                                 <td>
