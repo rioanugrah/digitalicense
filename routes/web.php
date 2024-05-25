@@ -39,6 +39,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::get('{slug}/{id}', [App\Http\Controllers\ProductController::class, 'detail'])->name('products.detail');
             Route::get('{slug}/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit'])->name('products.edit');
             Route::post('{slug}/{id}/update', [App\Http\Controllers\ProductController::class, 'update'])->name('products.update');
+            Route::post('{slug}/{id}/delete', [App\Http\Controllers\ProductController::class, 'delete'])->name('products.delete');
             Route::get('{slug}/{id}/checkout', [App\Http\Controllers\ProductController::class, 'checkout'])->name('products.checkout');
             Route::post('{slug}/{id}/checkout/buy', [App\Http\Controllers\ProductController::class, 'checkout_buy'])->name('products.checkout_buy');
         });
@@ -86,6 +87,12 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             $user = \App\Models\User::where('id',1)->orWhere('id',auth()->user()->id)->get();
             Notification::send($user,new App\Notifications\NotificationNotif($notif));
             event(new App\Events\NotificationEvent($notif['id'],$notif['url'],$notif['title'],$notif['message'],$notif['color_icon'],$notif['icon'],$notif['publish']));
+        });
+
+        Route::get('test_telegram', function(){
+            $user = \App\Models\User::where('id',1)->orWhere('id',auth()->user()->id)->get();
+            // return $user;
+            Notification::send($user, new App\Notifications\TelegramNotif(752617291));
         });
 
         // Route::post('mark-as-read', 'NotifikasiController@markNotification')->name('markNotification');

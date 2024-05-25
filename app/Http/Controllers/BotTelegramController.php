@@ -23,10 +23,10 @@ class BotTelegramController extends Controller
         $username = $updates->getChat()->getFirstName();
 
         switch (strtolower($updates->getMessage()->getText())) {
-            case 'userid':
+            case 'me':
                 return Telegram::sendMessage([
                     'chat_id' => $chat_id,
-                    'text' => 'Halo '.$username.', Your User ID '.$chat_id
+                    'text' => 'Halo '.$username.', Your User ID '.$chat_id.' Please update the profile menu'
                 ]);
                 break;
             case 'test':
@@ -54,5 +54,10 @@ class BotTelegramController extends Controller
         //         'text' => 'Halo '.$username
         //     ]);
         // }
+    }
+
+    public function invoiceNotif()
+    {
+
     }
 }

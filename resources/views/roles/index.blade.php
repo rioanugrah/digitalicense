@@ -1,5 +1,8 @@
 @extends('layouts.backend.master')
 
+@section('title')
+    Management Roles
+@endsection
 
 @section('content')
 <div class="row">

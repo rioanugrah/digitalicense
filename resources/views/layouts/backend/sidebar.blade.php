@@ -32,7 +32,7 @@
                 </li>
                 <li>
                     <a href="{{ route('orders') }}">
-                        <i class="fas fa-boxes"></i>
+                        <i class="fas fa-box"></i>
                         <span>Orders</span>
                     </a>
                 </li>
@@ -41,7 +41,7 @@
                 <li class="menu-title">TRANSACTION</li>
                 <li>
                     <a href="{{ route('transactions') }}">
-                        <i class="fas fa-boxes"></i>
+                        <i class="fas fa-credit-card"></i>
                         <span>Transaction</span>
                     </a>
                 </li>
@@ -51,7 +51,7 @@
                     @can('user-list')
                     <li>
                         <a href="{{ route('users.index') }}">
-                            <i class="fas fa-boxes"></i>
+                            <i class="far fa-user-circle"></i>
                             <span>User</span>
                         </a>
                     </li>
@@ -59,7 +59,7 @@
                     @can('role-list')
                     <li>
                         <a href="{{ route('roles.index') }}">
-                            <i class="fas fa-boxes"></i>
+                            <i class="fas fa-key"></i>
                             <span>Role</span>
                         </a>
                     </li>
@@ -67,7 +67,7 @@
                     @can('permission-list')
                     <li>
                         <a href="{{ route('permissions') }}">
-                            <i class="fas fa-boxes"></i>
+                            <i class="fas fa-key"></i>
                             <span>Permission</span>
                         </a>
                     </li>

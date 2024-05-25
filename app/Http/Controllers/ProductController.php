@@ -225,6 +225,19 @@ class ProductController extends Controller
             ->with(['error' => $validator->errors()->all()]);
     }
 
+    public function delete(Request $request, $slug, $id)
+    {
+        $product = $this->product->find($id);
+        if (empty($product)) {
+            return redirect()->back()->with(['error' => 'Data Tidak Ditemukan']);
+        }
+        $image_path = public_path('product_digital/'.$product->image);
+        File::delete($image_path);
+        $product->delete();
+
+        return redirect()->route('products')->with(['success' => 'Data Berhasil Dihapus']);
+    }
+
     public function checkout($slug,$id)
     {
         $data['product'] = $this->product->where('slug',$slug)->where('id',$id)->first();

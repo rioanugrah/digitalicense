@@ -19,7 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'generate', 'name', 'email', 'password',
+        'telegram_id', 'generate', 'name', 'email', 'password',
     ];
 
     /**
@@ -44,4 +44,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         // return $this->hasMany();
     }
+
+    // public function roles()
+    // {
+    //     return \DB::table('')
+    // }
 }

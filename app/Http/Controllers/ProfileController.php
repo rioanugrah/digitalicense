@@ -24,27 +24,41 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         // dd($request->all());
-        $rules = [
-            'password'  => 'required',
-        ];
+        // $rules = [
+        //     'password'  => 'required',
+        // ];
 
-        $messages = [
-            'password.required'  => 'Password wajib diisi.',
-        ];
+        // $messages = [
+        //     'password.required'  => 'Password wajib diisi.',
+        // ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
-        if ($validator->passes()) {
-            $users = $this->user->find(auth()->user()->id);
+        // $validator = Validator::make($request->all(), $rules, $messages);
+        // if ($validator->passes()) {
+        //     $users = $this->user->find(auth()->user()->id);
+        //     $users->password = Hash::make($request->password);
+        //     $users->update();
+
+        //     if($users){
+        //         return redirect()->route('profile')
+        //         ->with('success','Password Profile '.$users->name.' update successfully');
+        //     }
+        // }
+
+        // return redirect()->route('profile')
+        //     ->with(['error' => $validator->errors()->all()]);
+        $users = $this->user->find(auth()->user()->id);
+        if ($request->password) {
             $users->password = Hash::make($request->password);
-            $users->update();
-
-            if($users){
-                return redirect()->route('profile')
-                ->with('success','Password Profile '.$users->name.' update successfully');
-            }
         }
+        $users->telegram_id = $request->telegram_id;
+        $users->update();
 
-        return redirect()->route('profile')
-            ->with(['error' => $validator->errors()->all()]);
+        if($users){
+            return redirect()->route('profile')
+            ->with('success',$users->name.' update successfully');
+        }else{
+            return redirect()->route('profile')
+            ->with(['error' => 'Data belum disimpan']);
+        }
     }
 }

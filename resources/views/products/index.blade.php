@@ -24,6 +24,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ $message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="card">
                 <div class="card-body">
                     <div class="btn-group mt-2 mb-2 pull-right">
@@ -64,6 +70,14 @@
                                             <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>
                                                 Delete</button>
                                         </form> --}}
+                                        <form action="{{ route('products.delete', ['slug' => $product->slug, 'id' => $product->id]) }}" method="POST"
+                                            style="display:inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>
+                                                Delete</button>
+                                        </form>
+                                        {{-- <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>
+                                            Delete</button> --}}
                                     </td>
                                 </tr>
                             @endforeach
