@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 // use App\Notifications\NotificationNotif;
 // use App\Models\User;
 use App\Models\Orders;
 use App\Models\OrdersDetail;
 // use Notification;
+
+use App\Mail\NoReplyEmail;
 
 class TripayController extends Controller
 {
@@ -191,10 +194,20 @@ class TripayController extends Controller
             switch ($status) {
                 case 'PAID':
                     return 'OK';
-                    // $order->update([
-                    //     // 'transaction_reference' => $data->reference,
-                    //     'status' => 'Paid'
-                    // ]);
+                    $order->update([
+                        'status' => 'Paid'
+                    ]);
+                    $comment = '<p>Yeay, terimakasih telah melakukan pembayaran.</p>';
+                    Mail::to(json_decode($order->billing_order)->email)
+                    ->send(new NoReplyEmail(
+                        'Pembayaran Berhasil',
+                        $order->order_code,
+                        json_decode($order->billing_order)->name,
+                        json_decode($order->billing_order)->email,
+                        $order->price,
+                        $order->status,
+                        $comment)
+                    );
                     // $user = User::where('id',1)
                     //                 // ->orWhere('id',auth()->user()->id)
                     //                 ->get();

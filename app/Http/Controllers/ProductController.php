@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Payment\TripayController;
 use App\Notifications\NotificationNotif;
 use App\Models\User;
@@ -12,6 +13,9 @@ use App\Models\ProductDetail;
 use App\Models\Category;
 use App\Models\Orders;
 use App\Models\OrdersDetail;
+
+use App\Mail\NoReplyEmail;
+
 use \Carbon\Carbon;
 use Validator;
 use File;
@@ -303,7 +307,10 @@ class ProductController extends Controller
             $product->qty = $product->qty - 1;
             $product->update();
             $this->orders_detail->create($input2);
-
+            $comment = '<p>Silahkan Anda melakukan pembayaran di website kami</p>';
+            Mail::to($request->billing_email)
+                // ->subject('Konfirmasi Pembayaran')
+                ->send(new NoReplyEmail('Konfirmasi Pembayaran',$input['order_code'],$request->billing_name,$request->billing_email,$input['price'],$input['status'],$comment));
             // $user = \App\Models\User::where('id',1)
             //                         // ->orWhere('id',auth()->user()->id)
             //                         ->get();

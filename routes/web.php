@@ -73,27 +73,29 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         // Route::prefix('tripay')->group(function () {
         //     Route::get('/', [App\Http\Controllers\Payment\TripayController::class, 'getPayment']);
         // });
-        Route::get('test_notif', function(){            // new App\Notifications\NotificationNotif;
-            $notif = [
-                'id' => 1,
-                'url' => 'http://localhost:8000',
-                'title' => 'Notif Baru',
-                'message' => 'Pesanan Baru - Sedang Melakukan Pembayaran',
-                'color_icon' => 'warning',
-                'icon' => 'uil-clipboard-alt',
-                'publish' => \Carbon\Carbon::now(),
-            ];
-            // $user = auth()->user();
-            $user = \App\Models\User::where('id',1)->orWhere('id',auth()->user()->id)->get();
-            Notification::send($user,new App\Notifications\NotificationNotif($notif));
-            event(new App\Events\NotificationEvent($notif['id'],$notif['url'],$notif['title'],$notif['message'],$notif['color_icon'],$notif['icon'],$notif['publish']));
-        });
+        // Route::get('test_notif', function(){            // new App\Notifications\NotificationNotif;
+        //     $notif = [
+        //         'id' => 1,
+        //         'url' => 'http://localhost:8000',
+        //         'title' => 'Notif Baru',
+        //         'message' => 'Pesanan Baru - Sedang Melakukan Pembayaran',
+        //         'color_icon' => 'warning',
+        //         'icon' => 'uil-clipboard-alt',
+        //         'publish' => \Carbon\Carbon::now(),
+        //     ];
+        //     // $user = auth()->user();
+        //     $user = \App\Models\User::where('id',1)->orWhere('id',auth()->user()->id)->get();
+        //     Notification::send($user,new App\Notifications\NotificationNotif($notif));
+        //     event(new App\Events\NotificationEvent($notif['id'],$notif['url'],$notif['title'],$notif['message'],$notif['color_icon'],$notif['icon'],$notif['publish']));
+        // });
 
-        Route::get('test_telegram', function(){
-            $user = \App\Models\User::where('id',1)->orWhere('id',auth()->user()->id)->get();
-            // return $user;
-            Notification::send($user, new App\Notifications\TelegramNotif(752617291));
-        });
+        // Route::get('test_telegram', function(){
+        //     $user = \App\Models\User::where('id',1)->orWhere('id',auth()->user()->id)->get();
+        //     // return $user;
+        //     Notification::send($user, new App\Notifications\TelegramNotif(752617291));
+        // });
+
+        Route::get('testing_email', [App\Http\Controllers\TestingController::class, 'testing_email']);
 
         // Route::post('mark-as-read', 'NotifikasiController@markNotification')->name('markNotification');
         Route::post('mark-as-read', [App\Http\Controllers\NotifikasiController::class, 'markNotification'])->name('markNotification');

@@ -8,7 +8,7 @@
                         <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="30">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="24"> <span class="logo-txt">Digital License</span>
+                        <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="24"> <span class="logo-txt">Digitalicense</span>
                     </span>
                 </a>
 
@@ -17,7 +17,7 @@
                         <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="30">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="24"> <span class="logo-txt">Digital License</span>
+                        <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="24"> <span class="logo-txt">Digitalicense</span>
                     </span>
                 </a>
             </div>
