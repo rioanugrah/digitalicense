@@ -31,7 +31,7 @@ class HomeController extends Controller
     public function index()
     {
         $data['product'] = $this->product;
-        $data['orders'] = $this->orders->where('user_generate',auth()->user()->generate)->orWhere('user_generate','!=',auth()->user()->generate);
+        $data['orders'] = $this->orders->where('user_generate',auth()->user()->generate);
         return view('home',$data);
     }
 }
