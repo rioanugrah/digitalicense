@@ -193,7 +193,8 @@ class TripayController extends Controller
             }
             switch ($status) {
                 case 'PAID':
-                    return 'OK';
+                    // return 'OK';
+
                     $order->update([
                         'status' => 'Paid'
                     ]);
@@ -208,6 +209,7 @@ class TripayController extends Controller
                         $order->status,
                         $comment)
                     );
+
                     // $user = User::where('id',1)
                     //                 // ->orWhere('id',auth()->user()->id)
                     //                 ->get();
@@ -256,4 +258,9 @@ class TripayController extends Controller
             return Response::json(['success' => true]);
         }
     }
+
+    // public function handle(Request $request)
+    // {
+
+    // }
 }

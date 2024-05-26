@@ -55,10 +55,6 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::get('{order_code}/{order_reference}/validate', [App\Http\Controllers\TransactionController::class, 'check_transaction'])->name('transactions.check_transaction');
         });
 
-        Route::get('invoice',function(){
-            return 'invoice';
-        })->name('invoice');
-
         Route::prefix('permissions')->group(function () {
             Route::get('/', [App\Http\Controllers\PermissionsController::class, 'index'])->name('permissions');
             Route::get('create', [App\Http\Controllers\PermissionsController::class, 'create'])->name('permissions.create');
