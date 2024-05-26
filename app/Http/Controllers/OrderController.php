@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Orders;
+use App\Models\OrdersDetail;
+use Validator;
 
 class OrderController extends Controller
 {
     function __construct(
-        Orders $orders
+        Orders $orders,
+        OrdersDetail $orders_detail
     ){
         $this->orders = $orders;
+        $this->orders_detail = $orders_detail;
     }
 
     public function index()
@@ -36,8 +40,27 @@ class OrderController extends Controller
         return view('orders.detail',$data);
     }
 
-    public function detail_input_license($order_code,$id)
+    public function detail_input_license_simpan(Request $request,$order_code,$id)
     {
+        $rules = [
+            'product_license'  => 'required',
+        ];
 
+        $messages = [
+            'product_license.required'  => 'Product Key wajib diisi.',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->passes()) {
+            $orderDetail = $this->orders_detail->where('orders_id',$id)->first();
+            $orderDetail->product_license = $request->product_license;
+            $orderDetail->update();
+
+            if ($orderDetail) {
+                return redirect()->route('orders.detail',['order_code' => $order_code, 'id' => $id])
+                ->with('success',$orderDetail->order_name.' Product Key successfully');
+            }
+        }
     }
 }

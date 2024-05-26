@@ -113,9 +113,18 @@
                                 <td><a href="{{ asset('product_digital/berkas/'.$order_detail->product->link_file) }}" class="btn btn-primary"><i class="fas fa-download"></i> Download</a></td>
                                 @endif
                                 @if ($cek_user->role_id == 1)
-                                <td>
-                                    <a href="#" class="btn btn-primary">Input License</a>
-                                </td>
+                                    @if (!$order_detail->product_license)
+                                    <td>
+                                        <form action="{{ route('orders.detail_input_license_simpan',['order_code' => $order->order_code, 'id' => $order->id]) }}" method="post" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <input type="text" name="product_license" class="form-control" placeholder="Input Product Key">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            {{-- <a href="#" class="btn btn-primary">Input License</a> --}}
+                                        </form>
+                                    </td>
+                                    @endif
                                 @endif
                             </tr>
                             @endforeach

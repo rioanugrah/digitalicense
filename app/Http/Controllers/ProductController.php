@@ -309,6 +309,7 @@ class ProductController extends Controller
             $this->orders_detail->create($input2);
             $comment = '<p>Silahkan Anda melakukan pembayaran di website kami</p>';
             Mail::to($request->billing_email)
+                ->cc('marketing@digitalicense.biz.id')
                 // ->subject('Konfirmasi Pembayaran')
                 ->send(new NoReplyEmail('Konfirmasi Pembayaran',$input['order_code'],$request->billing_name,$request->billing_email,$input['price'],$input['status'],$comment));
             // $user = \App\Models\User::where('id',1)

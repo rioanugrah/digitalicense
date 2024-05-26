@@ -47,6 +47,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::prefix('orders')->group(function () {
             Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('orders');
             Route::get('{order_code}/{id}', [App\Http\Controllers\OrderController::class, 'detail'])->name('orders.detail');
+            Route::post('{order_code}/{id}/license/simpan', [App\Http\Controllers\OrderController::class, 'detail_input_license_simpan'])->name('orders.detail_input_license_simpan');
         });
 
         Route::prefix('transactions')->group(function () {

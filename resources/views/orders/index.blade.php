@@ -27,6 +27,7 @@
                                 <th class="text-center">#</th>
                                 <th class="text-center">Billing Name</th>
                                 <th class="text-center">Order Date</th>
+                                <th class="text-center">Order Detail</th>
                                 <th class="text-center">Total</th>
                                 <th class="text-center">Status</th>
                                 <th class="text-center">Action</th>
@@ -38,6 +39,16 @@
                                     <td class="text-center">{{ $key+1 }}</td>
                                     <td>{{ json_decode($order->billing_order)->name }}</td>
                                     <td class="text-center">{{ $order->created_at }}</td>
+                                    <td>
+                                        <ul>
+                                            @foreach ($order->order_detail as $order_detail)
+                                            <li>
+                                                <div>Order Name : {{ $order_detail->order_name }}</div>
+                                                <div>Qty : {{ $order_detail->qty }}</div>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </td>
                                     <td class="text-center">{{ 'Rp. '.number_format($order->price,0,',','.') }}</td>
                                     <td class="text-center">
                                         @php

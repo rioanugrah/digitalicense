@@ -200,6 +200,7 @@ class TripayController extends Controller
                     ]);
                     $comment = '<p>Yeay, terimakasih telah melakukan pembayaran.</p>';
                     Mail::to(json_decode($order->billing_order)->email)
+                    ->cc('marketing@digitalicense.biz.id')
                     ->send(new NoReplyEmail(
                         'Pembayaran Berhasil',
                         $order->order_code,
