@@ -102,8 +102,16 @@
                         <input type="file" name="image" class="form-control" id="">
                     </div>
                     <div class="mb-3">
-                        <label for="">Upload File</label>
-                        <input type="file" name="link_file" class="form-control" id="">
+                        <label for="">Jenis Upload</label>
+                        <select name="jenis_upload" class="form-control" id="jenis_upload">
+                            <option value="">-- Pilih Jenis Upload --</option>
+                            <option value="url">URL</option>
+                            <option value="file">File</option>
+                        </select>
+                    </div>
+                    <div class="mb-3" id="hasil_jenis_upload">
+                        {{-- <label for="">Upload File</label>
+                        <input type="file" name="link_file" class="form-control" id=""> --}}
                     </div>
                     <div class="mb-3">
                         <label for="">Keywords</label>
@@ -137,4 +145,14 @@
     <script src="{{ URL::asset('assets/js/pages/form-editor.init.js') }}"></script>
     {{-- <script src="{{ URL::asset('assets/libs/choices.js/choices.js.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/pages/form-advanced.init.js') }}"></script> --}}
+    <script>
+        $('#jenis_upload').on('change',function(){
+            // alert($('#jenis_upload').val());
+            if ($('#jenis_upload').val() == 'url') {
+                document.getElementById('hasil_jenis_upload').innerHTML = '<label for="">Link File</label>'+'<input type="text" name="link_file" class="form-control" placeholder="Link File">';
+            }else if($('#jenis_upload').val() == 'file') {
+                document.getElementById('hasil_jenis_upload').innerHTML = '<label for="">Upload File</label>'+'<input type="file" name="link_file" class="form-control">';
+            }
+        });
+    </script>
 @endsection

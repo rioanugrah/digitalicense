@@ -205,13 +205,17 @@ class ProductController extends Controller
                 $input['image'] = $input['image'];
             }
 
-            if ($request->file('link_file')) {
-                $file_path = public_path('product_digital/berkas/'.$product->link_file);
-                File::delete($file_path);
-                $files = $request->file('link_file');
-                $namefile = $files->getClientOriginalName();
-                $files->move('product_digital/berkas/',$namefile);
-                $input['link_file'] = $namefile;
+            if ($request->jenis_upload == 'url') {
+                $input['link_file'] = $request->link_file;
+            }elseif($request->jenis_upload == 'file') {
+                if ($request->file('link_file')) {
+                    $file_path = public_path('product_digital/berkas/'.$product->link_file);
+                    File::delete($file_path);
+                    $files = $request->file('link_file');
+                    $namefile = $files->getClientOriginalName();
+                    $files->move('product_digital/berkas/',$namefile);
+                    $input['link_file'] = $namefile;
+                }
             }
 
             // $input['link_file'] = $request->link_file;
