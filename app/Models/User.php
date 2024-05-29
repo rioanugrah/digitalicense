@@ -49,4 +49,9 @@ class User extends Authenticatable implements MustVerifyEmail
     // {
     //     return \DB::table('')
     // }
+
+    public function cart()
+    {
+        // return $this->
+    }
 }
