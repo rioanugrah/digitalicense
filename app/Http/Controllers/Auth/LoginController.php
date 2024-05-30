@@ -33,6 +33,12 @@ class LoginController extends Controller
      *
      * @return void
      */
+
+     protected function authenticated()
+    {
+        \Auth::logoutOtherDevices(request('password'));
+    }
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
