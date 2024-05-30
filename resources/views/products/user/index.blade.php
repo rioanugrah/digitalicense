@@ -1,4 +1,7 @@
 @extends('layouts.backend.master')
+@section('title')
+    Product
+@endsection
 @section('css')
     <link href="{{ URL::asset('assets/libs/nouislider/nouislider.min.css') }}" rel="stylesheet">
 @endsection
