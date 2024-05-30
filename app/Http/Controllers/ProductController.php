@@ -103,12 +103,22 @@ class ProductController extends Controller
             $input['image'] = time().'.webp';
             $img->save(public_path('product_digital/').$input['image']);
 
-            if ($request->file('link_file')) {
-                $files = $request->file('link_file');
-                $namefile = $files->getClientOriginalName();
-                $files->move('product_digital/berkas/',$namefile);
-                $input['link_file'] = $namefile;
+            if ($request->jenis_upload == 'url') {
+                $input['link_file'] = $request->link_file;
+            }elseif($request->jenis_upload == 'file'){
+                if ($request->file('link_file')) {
+                    $files = $request->file('link_file');
+                    $namefile = $files->getClientOriginalName();
+                    $files->move('product_digital/berkas/',$namefile);
+                    $input['link_file'] = asset('product_digital/berkas/'.$namefile);
+                }
             }
+            // if ($request->file('link_file')) {
+            //     $files = $request->file('link_file');
+            //     $namefile = $files->getClientOriginalName();
+            //     $files->move('product_digital/berkas/',$namefile);
+            //     $input['link_file'] = $namefile;
+            // }
             $input['keywords'] = $request->keywords;
 
             $product = $this->product->create($input);
@@ -214,7 +224,8 @@ class ProductController extends Controller
                     $files = $request->file('link_file');
                     $namefile = $files->getClientOriginalName();
                     $files->move('product_digital/berkas/',$namefile);
-                    $input['link_file'] = $namefile;
+                    // $input['link_file'] = $namefile;
+                    $input['link_file'] = asset('product_digital/berkas/'.$namefile);
                 }
             }
 

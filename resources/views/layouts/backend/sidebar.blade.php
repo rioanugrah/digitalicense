@@ -7,7 +7,7 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
-                <li class="menu-title">MENU</li>
+                {{-- <li class="menu-title">MENU</li> --}}
                 <li>
                     <a href="{{ route('home') }}">
                         <i class="fas fa-home"></i>

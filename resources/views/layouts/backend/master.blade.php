@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="_token" content="{{ csrf_token() }}">
+    <meta name="author" content="Digital License">
+    <meta name="description" content="@yield('description')">
+    <meta name="theme-color" content="#00215E">
+    <meta name="keywords" content="@yield('keywords')">
+    <link rel="canonical" href="@yield('canonical')">
+    <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <meta property="og:locale:alternate" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <meta property="og:type" content="Digital Product">
+    <meta property="og:title" content="@yield('title')">
+    {{-- <meta property="og:url" content="{{ url('/') }}"> --}}
+    <meta property="og:site_name" content="Digital License">
+    <meta property="og:description" content="@yield('description')">
+    <meta name="robots" content="follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:standard">
     <title>@yield('title')</title>
     @include('layouts.backend.head')
 </head>

@@ -74,7 +74,7 @@
 
 @extends('layouts.authentication')
 @section('title')
-    Login
+    Login Digital License
 @endsection
 @section('content')
 <div class="auth-page">
