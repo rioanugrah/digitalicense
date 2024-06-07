@@ -35,6 +35,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::prefix('products')->group(function () {
             Route::get('/', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
             Route::get('create', [App\Http\Controllers\ProductController::class, 'create'])->name('products.create');
+            Route::get('search', [App\Http\Controllers\ProductController::class, 'search'])->name('products.search');
             Route::post('simpan', [App\Http\Controllers\ProductController::class, 'simpan'])->name('products.simpan');
             Route::get('{slug}/{id}', [App\Http\Controllers\ProductController::class, 'detail'])->name('products.detail');
             Route::get('{slug}/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit'])->name('products.edit');

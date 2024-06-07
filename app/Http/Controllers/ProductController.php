@@ -66,6 +66,12 @@ class ProductController extends Controller
         return view('products.create',$data);
     }
 
+    public function search(Request $request)
+    {
+        $data['products'] = $this->product->where('name','like','%'.$request->search.'%')->orderBy('created_at','desc')->get();
+        return view('products.user.index',$data);
+    }
+
     public function simpan(Request $request)
     {
         $rules = [

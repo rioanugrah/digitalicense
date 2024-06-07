@@ -20,10 +20,10 @@
             </div>
         </div> --}}
         <div class="col-lg-12">
-            <form action="" class="mt-4 mt-sm-0 float-sm-end d-sm-flex align-items-center">
+            <form action="{{ route('products.search') }}" class="mt-4 mt-sm-0 float-sm-end d-sm-flex align-items-center">
                 <div class="search-box me-2">
                     <div class="position-relative">
-                        <input type="text" class="form-control border-0" placeholder="Search...">
+                        <input type="text" name="search" class="form-control border-0" value="{{ old('search') }}" placeholder="Search...">
                         <i class="bx bx-search-alt search-icon"></i>
                     </div>
                 </div>
