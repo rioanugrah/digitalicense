@@ -14,9 +14,16 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes(['verify' => true]);
 Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
-    Route::get('/', function () {
-        // return view('welcome');
-        return redirect()->route('login');
+    // Route::get('/', function () {
+    //     return view('frontend.index');
+    //     // return redirect()->route('login');
+    // })->name('frontend');
+    Route::prefix('/')->group(function () {
+        Route::get('/', [App\Http\Controllers\FrontendController::class, 'index'])->name('frontend');
+        Route::get('product/{category}', [App\Http\Controllers\FrontendController::class, 'product'])->name('frontend.product');
+        Route::get('product/{category}/{slug}/detail', [App\Http\Controllers\FrontendController::class, 'product_detail'])->name('frontend.product_detail');
+        Route::get('product/{category}/{slug}/checkout', [App\Http\Controllers\FrontendController::class, 'product_checkout'])->name('frontend.product_checkout');
+        // Route::get('product/{slug}/detail', [App\Http\Controllers\FrontendController::class, 'product_detail'])->name('frontend.product_detail');
     });
     Route::group(['middleware' => ['auth','verified']], function () {
         Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -68,9 +75,9 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::post('update', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
         });
 
-        // Route::prefix('tripay')->group(function () {
-        //     Route::get('/', [App\Http\Controllers\Payment\TripayController::class, 'getPayment']);
-        // });
+        Route::prefix('tripay')->group(function () {
+            Route::get('/', [App\Http\Controllers\Payment\TripayController::class, 'getPayment']);
+        });
         // Route::get('test_notif', function(){            // new App\Notifications\NotificationNotif;
         //     $notif = [
         //         'id' => 1,

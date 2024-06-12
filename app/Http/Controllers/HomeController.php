@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Orders;
+use \Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -30,8 +31,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $live_date = Carbon::now();
         $data['product'] = $this->product;
-        $data['orders'] = $this->orders->where('user_generate',auth()->user()->generate);
+        $data['order_day'] = $this->orders->where('user_generate',auth()->user()->generate)->where('created_at','like','%'.$live_date->format('Y-m-d').'%');
         return view('home',$data);
     }
 }
