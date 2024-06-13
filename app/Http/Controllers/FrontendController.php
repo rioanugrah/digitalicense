@@ -46,7 +46,8 @@ class FrontendController extends Controller
     {
         $data['categories'] = $this->category->where('slug',$category)
                                             ->whereHas('product_detail', function($product) use($slug){
-                                                $product->where('slug',$slug);
+                                                // $product->where('slug',$slug);
+                                                dd($slug);
                                             })
                                             ->first();
                                             // dd($data);
@@ -55,6 +56,7 @@ class FrontendController extends Controller
         if (empty($data['categories'])) {
             return redirect()->back();
         }
+        // $data['product'] = $this->product->where('')
         return view('frontend.product.detail',$data);
     }
 
