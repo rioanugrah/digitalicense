@@ -44,11 +44,40 @@ class FrontendController extends Controller
 
     public function product_detail($category,$slug)
     {
-        $data['categories'] = $this->category->where('slug',$category)
-                                            ->whereHas('product_detail', function($product) use($slug){
-                                                $product->where('slug',$slug);
-                                            })
+        $data['categories'] = $this->category
+                                            ->select([
+                                              'product.id as id',
+                                              'category.slug as slug_category',
+                                              'product.slug as slug_product',
+                                              'product.name as name',
+                                              'product.description as description',
+                                              'product.price as price',
+                                              'product.qty as qty',
+                                              'product.image as image',
+                                              'product.created_at as created_at',
+                                              'product.updated_at as updated_at',
+                                            ])
+                                            // ->select('
+                                            //     product.id as id,
+                                            //     product.slug as slug,
+                                            //     product.name as name,
+                                            //     product.description as description,
+                                            //     product.price as price,
+                                            //     product.qty as qty,
+                                            //     product.image as image,
+                                            //     product.created_at as created_at,
+                                            //     product.updated_at as updated_at
+                                            // ')
+                                            ->leftJoin('product','product.category_id','category.id')
+                                            ->where('category.slug',$category)
+                                            ->where('product.slug',$slug)
                                             ->first();
+        // $data['categories'] = $this->category->with('product_detail')
+        //                                     ->where('slug',$category)
+        //                                     ->whereHas('product_detail', function($product) use($slug){
+        //                                         return $product->where('slug','=','gowilds-travel-tour-booking-wordpress-theme');
+        //                                     })
+        //                                     ->first();
                                             // dd($data);
 
         // $data['product'] = $this->product->where('slug',$slug)->first();
@@ -61,10 +90,38 @@ class FrontendController extends Controller
 
     public function product_checkout($category,$slug)
     {
-        $data['categories'] = $this->category->where('slug',$category)
-                                            ->whereHas('product_detail', function($product) use($slug){
-                                                $product->where('slug',$slug);
-                                            })
+        // $data['categories'] = $this->category->where('slug',$category)
+        //                                     ->whereHas('product_detail', function($product) use($slug){
+        //                                         $product->where('slug',$slug);
+        //                                     })
+        //                                     ->first();
+        $data['categories'] = $this->category
+                                            ->select([
+                                              'product.id as id',
+                                              'category.slug as slug_category',
+                                              'product.slug as slug_product',
+                                              'product.name as name',
+                                              'product.description as description',
+                                              'product.price as price',
+                                              'product.qty as qty',
+                                              'product.image as image',
+                                              'product.created_at as created_at',
+                                              'product.updated_at as updated_at',
+                                            ])
+                                            // ->select('
+                                            //     product.id as id,
+                                            //     product.slug as slug,
+                                            //     product.name as name,
+                                            //     product.description as description,
+                                            //     product.price as price,
+                                            //     product.qty as qty,
+                                            //     product.image as image,
+                                            //     product.created_at as created_at,
+                                            //     product.updated_at as updated_at
+                                            // ')
+                                            ->leftJoin('product','product.category_id','category.id')
+                                            ->where('category.slug',$category)
+                                            ->where('product.slug',$slug)
                                             ->first();
         if (empty($data['categories'])) {
             return redirect()->back();

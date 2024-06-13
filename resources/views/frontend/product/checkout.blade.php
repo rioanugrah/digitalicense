@@ -304,18 +304,18 @@
                                 <tr>
                                     <th scope="row">
                                         <img
-                                            src="{{ asset('product_digital/'.$categories->product_detail->image) }}"
-                                            alt="{{ $categories->product_detail->name }}" title="{{ $categories->product_detail->name }}"
+                                            src="{{ asset('product_digital/'.$categories->image) }}"
+                                            alt="{{ $categories->name }}" title="{{ $categories->name }}"
                                             class="avatar-md">
                                     </th>
                                     <td>
                                         <h5 class="font-size-14 text-truncate"><a
-                                                class="text-dark">{{ $categories->product_detail->name }}</a>
+                                                class="text-dark">{{ $categories->name }}</a>
                                         </h5>
                                         <p class="text-muted mb-0">
-                                            {{ 'Rp. ' . number_format($categories->product_detail->price, 0, ',', '.') }} x 1</p>
+                                            {{ 'Rp. ' . number_format($categories->price, 0, ',', '.') }} x 1</p>
                                     </td>
-                                    <td>{{ 'Rp. ' . number_format($categories->product_detail->price, 0, ',', '.') }}</td>
+                                    <td>{{ 'Rp. ' . number_format($categories->price, 0, ',', '.') }}</td>
                                 </tr>
                             </tbody>
                         </table>

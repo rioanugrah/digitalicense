@@ -15,6 +15,7 @@ class Category extends Model
     protected $dates = ['deleted_at'];
 
     public $fillable = [
+        'id',
         'slug',
         'name',
     ];
@@ -26,6 +27,6 @@ class Category extends Model
 
     public function product_detail()
     {
-        return $this->belongsTo(\App\Models\Product::class, 'id','category_id');
+        return $this->hasMany(\App\Models\Product::class, 'category_id');
     }
 }
