@@ -14,12 +14,12 @@
                     <h1 style="font-size: 12pt">{{ $category->name }} <a style="font-weight: 100; color: blue">See All</a></h1>
                     @foreach ($category->product as $product)
                     <div class="col-xl-3 col-md-6">
-                        {{-- <button class="card" onclick="window.location.href='{{ route('frontend.product_detail',['slug' => $product->slug]) }}'">
+                        <button class="card" onclick="window.location.href='{{ route('frontend.product_detail',['category' => $category->slug,'slug' => $product->slug]) }}'">
                             <img class="card-img-top img-fluid" src="{{ asset('product_digital/'.$product->image) }}" alt="{{ $product->name }}">
                             <div class="card-body">
                                 <h4 class="card-title">{{ $product->name }}</h4>
                             </div>
-                        </button> --}}
+                        </button>
                     </div>
                     @endforeach
                 </div>

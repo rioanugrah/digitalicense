@@ -68,7 +68,7 @@ class FrontendController extends Controller
         if (empty($data['categories'])) {
             return redirect()->back();
         }
-        // $data['channels'] = json_decode($this->tripay_payment->getPayment())->data;
+        $data['channels'] = json_decode($this->tripay_payment->getPayment())->data;
         // dd($data);
         return view('frontend.product.checkout',$data);
     }

@@ -262,6 +262,28 @@
                             </div>
                         </div>
                     </div>
+                    <div class="mb-3 mt-3" style="font-weight: bold; font-size: 14pt">Payment Method</div>
+                    <div class="row">
+                        @foreach ($channels as $key => $channel)
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <div class="form-check form-check-inline font-size-16">
+                                    <input class="form-check-input" type="radio" name="method"
+                                        id="paymentoptionsRadio{{ $key }}"
+                                        value="{{ $channel->code }}" required>
+                                    <label class="form-check-label font-size-13"
+                                        for="paymentoptionsRadio{{ $key }}">
+                                        <img src="{{ $channel->icon_url }}" width="80">
+                                        {!! $channel->name !!}
+                                        <p>Service Fee : <b>Rp.
+                                                {{ number_format($channel->total_fee->flat, 0, ',', '.') }}</b>
+                                        </p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -295,13 +317,15 @@
                                     </td>
                                     <td>{{ 'Rp. ' . number_format($categories->product_detail->price, 0, ',', '.') }}</td>
                                 </tr>
-                                <tr>
-                                    <td colspan="2">Service Fee</td>
-                                    <td id="service_fee"></td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <button type="submit" class="btn btn-success">Buy Now</button>
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ route('frontend') }}'">Cancel</button>
                 </div>
             </div>
         </div>
