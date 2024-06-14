@@ -23,6 +23,8 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::get('product/{category}', [App\Http\Controllers\FrontendController::class, 'product'])->name('frontend.product');
         Route::get('product/{category}/{slug}/detail', [App\Http\Controllers\FrontendController::class, 'product_detail'])->name('frontend.product_detail');
         Route::get('product/{category}/{slug}/checkout', [App\Http\Controllers\FrontendController::class, 'product_checkout'])->name('frontend.product_checkout');
+        Route::post('product/{category}/{slug}/checkout/buy', [App\Http\Controllers\FrontendController::class, 'product_checkout_buy'])->name('frontend.product_checkout_buy');
+
         // Route::get('product/{slug}/detail', [App\Http\Controllers\FrontendController::class, 'product_detail'])->name('frontend.product_detail');
     });
     Route::group(['middleware' => ['auth','verified']], function () {
