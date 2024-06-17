@@ -309,16 +309,16 @@ class ProductController extends Controller
             'country' => $request->billing_country,
             'order_note' => $request->billing_order_note
         ]);
-        $input['price'] = $product->price;
+
+        $channels = json_decode($this->tripay_payment->getPayment())->data;
+        foreach ($channels as $channel) {
+            if ($request->method == $channel->code) {
+                $price_layanan = $channel->total_fee->flat;
+            }
+        }
+        $input['price'] = $product->price + $price_layanan;
         $input['status'] = 'Unpaid';
         $input['user_generate'] = auth()->user()->generate;
-
-        $input2['id'] = Str::uuid()->toString();
-        $input2['orders_id'] = $input['id'];
-        $input2['order_name'] = $product->name;
-        $input2['product_id'] = $id;
-        $input2['qty'] = 1;
-        $input2['price'] = $input['price'];
         // dd($input2);
 
         $order = $this->orders->create($input);
@@ -327,7 +327,34 @@ class ProductController extends Controller
         if ($order) {
             $product->qty = $product->qty - 1;
             $product->update();
-            $this->orders_detail->create($input2);
+
+            // $input2['id'] = Str::uuid()->toString();
+            // $input2['orders_id'] = $input['id'];
+            // $input2['order_name'] = $product->name;
+            // $input2['qty'] = 1;
+            // $input2['price'] = $input['price'];
+
+            $input2 = array(
+                [
+                    'id' => Str::uuid()->toString(),
+                    'orders_id' => $input['id'],
+                    'order_name' => $product->name,
+                    'qty' => 1,
+                    'price' => $product->price
+                ],
+                [
+                    'id' => Str::uuid()->toString(),
+                    'orders_id' => $input['id'],
+                    'order_name' => 'Biaya Layanan',
+                    'qty' => 1,
+                    'price' => $price_layanan
+                ],
+            );
+
+            foreach ($input2 as $input_2) {
+                $this->orders_detail->create($input_2);
+            }
+
             $comment = '<p>Silahkan Anda melakukan pembayaran di website kami</p>';
             Mail::to($request->billing_email)
                 ->cc('marketing@digitalicense.biz.id')

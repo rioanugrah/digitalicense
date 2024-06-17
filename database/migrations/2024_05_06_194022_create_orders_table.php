@@ -29,10 +29,8 @@ class CreateOrdersTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('orders_id');
             $table->string('order_name');
-            $table->uuid('product_id');
             $table->string('qty');
             $table->string('price');
-            $table->text('product_license')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

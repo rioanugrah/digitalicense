@@ -32,7 +32,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
         Route::resource('roles', App\Http\Controllers\RoleController::class);
         Route::resource('users', App\Http\Controllers\UserController::class);
 
-        Route::prefix('category')->group(function () {
+        Route::prefix('b/category')->group(function () {
             Route::get('/', [App\Http\Controllers\CategoryController::class, 'index'])->name('category');
             Route::get('create', [App\Http\Controllers\CategoryController::class, 'create'])->name('category.create');
             Route::post('simpan', [App\Http\Controllers\CategoryController::class, 'simpan'])->name('category.simpan');
@@ -41,7 +41,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::post('{id}/delete', [App\Http\Controllers\CategoryController::class, 'delete'])->name('category.delete');
         });
 
-        Route::prefix('products')->group(function () {
+        Route::prefix('b/products')->group(function () {
             Route::get('/', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
             Route::get('create', [App\Http\Controllers\ProductController::class, 'create'])->name('products.create');
             Route::get('search', [App\Http\Controllers\ProductController::class, 'search'])->name('products.search');
@@ -54,13 +54,13 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::post('{slug}/{id}/checkout/buy', [App\Http\Controllers\ProductController::class, 'checkout_buy'])->name('products.checkout_buy');
         });
 
-        Route::prefix('orders')->group(function () {
+        Route::prefix('b/orders')->group(function () {
             Route::get('/', [App\Http\Controllers\OrderController::class, 'index'])->name('orders');
             Route::get('{order_code}/{id}', [App\Http\Controllers\OrderController::class, 'detail'])->name('orders.detail');
-            Route::post('{order_code}/{id}/license/simpan', [App\Http\Controllers\OrderController::class, 'detail_input_license_simpan'])->name('orders.detail_input_license_simpan');
+            // Route::post('{order_code}/{id}/license/simpan', [App\Http\Controllers\OrderController::class, 'detail_input_license_simpan'])->name('orders.detail_input_license_simpan');
         });
 
-        Route::prefix('transactions')->group(function () {
+        Route::prefix('b/transactions')->group(function () {
             Route::get('/', [App\Http\Controllers\TransactionController::class, 'index'])->name('transactions');
             Route::get('{order_code}', [App\Http\Controllers\TransactionController::class, 'detail'])->name('transactions.detail');
             Route::get('{order_code}/{order_reference}/validate', [App\Http\Controllers\TransactionController::class, 'check_transaction'])->name('transactions.check_transaction');
