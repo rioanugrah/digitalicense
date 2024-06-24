@@ -10,9 +10,9 @@
                             DL
                     </span>
                     <span class="logo-lg">
-                        {{-- <img src="{{ URL::asset('build/images/logo-dark.png') }}" alt="logo-dark"
-                            height="22"> --}}
-                            DIGITALICENSE
+                        <img src="{{ URL::asset('assets/images/logo_digitalicense.png') }}" alt="Logo Digitalicense"
+                            height="90">
+                            {{-- DIGITALICENSE --}}
                     </span>
                 </a>
 
