@@ -52,7 +52,10 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td><img src="{{ asset('product_digital/'.$product->image) }}" width="200"></td>
-                                    <td>{{ $product->name }}</td>
+                                    <td>
+                                        <div>{{ $product->name }}</div>
+                                        <div>Kategori : {{ $product->category->name.' - '.$product->category->category_detail->name }}</div>
+                                    </td>
                                     <td>{{ 'Rp. '.number_format($product->price,0,',','.') }}</td>
                                     <td>{{ $product->qty }}</td>
                                     <td>
