@@ -16,7 +16,7 @@
                             @foreach ($category->product as $product)
                                 <div class="col-xl-3 col-md-6">
                                     <button class="card"
-                                        onclick="window.location.href='{{ route('frontend.product_detail', ['category' => $category->slug, 'slug' => $product->slug]) }}'">
+                                        onclick="window.location.href='{{ route('frontend.product_detail', ['category' => $category->slug, 'category_id' => $category->category_detail->id, 'slug' => $product->slug]) }}'">
                                         <img class="card-img-top img-fluid"
                                             src="{{ asset('product_digital/' . $product->image) }}"
                                             alt="{{ $product->name }}">
