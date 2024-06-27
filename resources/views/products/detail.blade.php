@@ -36,7 +36,7 @@
                             <tr>
                                 <th>Category Product</th>
                                 <td class="text-center">:</td>
-                                <td>{{ $product->category->name }}</td>
+                                <td>{{ $product->category->name.' - '.$product->category->category_detail->name }}</td>
                             </tr>
                             <tr>
                                 <th>Quantity</th>

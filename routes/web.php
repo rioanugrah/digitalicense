@@ -39,6 +39,11 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::get('{id}/edit', [App\Http\Controllers\CategoryController::class, 'edit'])->name('category.edit');
             Route::post('{id}/update', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
             Route::post('{id}/delete', [App\Http\Controllers\CategoryController::class, 'delete'])->name('category.delete');
+            Route::get('{id}/detail/{slug}', [App\Http\Controllers\CategoryController::class, 'category_detail'])->name('category.category_detail');
+            Route::get('{id}/detail/{slug}/create', [App\Http\Controllers\CategoryController::class, 'category_detail_create'])->name('category.category_detail_create');
+            Route::post('{id}/detail/{slug}/simpan', [App\Http\Controllers\CategoryController::class, 'category_detail_simpan'])->name('category.category_detail_simpan');
+            Route::get('{id}/detail/{slug}/edit/{id_category}', [App\Http\Controllers\CategoryController::class, 'category_detail_edit'])->name('category.category_detail_edit');
+            Route::post('{id}/detail/{slug}/edit/{id_category}/update', [App\Http\Controllers\CategoryController::class, 'category_detail_update'])->name('category.category_detail_update');
         });
 
         Route::prefix('b/products')->group(function () {
@@ -46,6 +51,7 @@ Route::domain(parse_url(env('APP_URL'), PHP_URL_HOST))->group(function () {
             Route::get('create', [App\Http\Controllers\ProductController::class, 'create'])->name('products.create');
             Route::get('search', [App\Http\Controllers\ProductController::class, 'search'])->name('products.search');
             Route::post('simpan', [App\Http\Controllers\ProductController::class, 'simpan'])->name('products.simpan');
+            Route::get('category_detail/{category_id}', [App\Http\Controllers\ProductController::class, 'category_detail'])->name('products.category_detail');
             Route::get('{slug}/{id}', [App\Http\Controllers\ProductController::class, 'detail'])->name('products.detail');
             Route::get('{slug}/{id}/edit', [App\Http\Controllers\ProductController::class, 'edit'])->name('products.edit');
             Route::post('{slug}/{id}/update', [App\Http\Controllers\ProductController::class, 'update'])->name('products.update');

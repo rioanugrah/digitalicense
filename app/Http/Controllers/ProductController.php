@@ -72,6 +72,25 @@ class ProductController extends Controller
         return view('products.user.index',$data);
     }
 
+    public function category_detail($category_id)
+    {
+        $category = $this->category->with('category_detail_list')->whereHas('category_detail_list', function($cd) use($category_id){
+                                        $cd->where('category_id',$category_id);
+                                    })->first();
+        if (empty($category->category_detail_list)) {
+            return response()->json([
+                'success' => false,
+                'message_title' => 'Gagal',
+                'message_content' => 'Data Tidak Ditemukan'
+            ]);
+        }
+        return response()->json([
+            'success' => true,
+            'data' => $category
+        ]);
+                                    // dd($category);
+    }
+
     public function simpan(Request $request)
     {
         $rules = [
@@ -181,6 +200,7 @@ class ProductController extends Controller
     {
         $rules = [
             'category_id'  => 'required',
+            'category_detail_id'  => 'required',
             'name'  => 'required',
             'price'  => 'required',
             'qty'  => 'required',
@@ -191,6 +211,7 @@ class ProductController extends Controller
         $messages = [
             'name.required'  => 'Nama Produk wajib diisi.',
             'category_id.required'  => 'Kategori wajib diisi.',
+            'category_detail_id.required'  => 'Kategori Detail wajib diisi.',
             'price.required'  => 'Harga wajib diisi.',
             'qty.required'  => 'Quantity wajib diisi.',
             // 'image.required'  => 'Image wajib diisi.',
@@ -205,6 +226,7 @@ class ProductController extends Controller
             $input['slug'] = Str::slug($request->name);
             $input['name'] = $request->name;
             $input['category_id'] = $request->category_id;
+            $input['category_detail_id'] = $request->category_detail_id;
             $input['description'] = $request->description;
             $input['qty'] = $request->qty;
             $input['price'] = $request->price;

@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Kategori</h2>
+                <h2>Kategori {{ $category->name }}</h2>
             </div>
         </div>
         <div class="col-lg-12">
@@ -24,10 +24,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="btn-group mt-2 mb-2 pull-right">
-                        <a href="{{ route('category.create') }}" class="btn btn-primary">Buat Kategori</a>
+                        <a href="{{ route('category') }}" class="btn btn-secondary">Back</a>
+                        <a href="{{ route('category.category_detail_create',['id' => $category->id, 'slug' => $category->slug]) }}" class="btn btn-primary">Buat Kategori</a>
                     </div>
                     <table id="datatable" class="table table-bordered dt-responsive nowrap"
-                        style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -36,26 +37,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $key => $category)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $category->name }}</td>
-                                    <td>
-                                        <a href="{{ route('category.category_detail', ['id' => $category->id, 'slug' => $category->slug]) }}"
-                                            class="btn btn-info"><i class="fas fa-eye"></i> Kategor Detail</a>
-                                        <a href="{{ route('category.edit', ['id' => $category->id]) }}"
-                                            class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
-                                        <form action="{{ route('category.delete',['id' => $category->id]) }}" method="POST" style="display:inline">
-                                            @csrf
-                                            <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i>
-                                                Delete</button>
-                                        </form>
-                                        {{-- {!! Form::open(['method' => 'DELETE','style'=>'display:inline']) !!}
-                                            <i class="fas fa-trash"></i>
-                                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                                        {!! Form::close() !!} --}}
-                                    </td>
-                                </tr>
+                            @foreach ($category->category_detail_list as $key => $category_detail)
+                            <tr>
+                                <td>{{ $key+1 }}</td>
+                                <td>{{ $category_detail->name }}</td>
+                                <td>
+                                    <a onclick="window.location.href='{{ route('category.category_detail_edit',['id' => $category->id, 'slug' => $category->slug, 'id_category' => $category_detail->id]) }}'" class="btn btn-warning"><i class="fas fa-edit"></i> Edit</a>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>

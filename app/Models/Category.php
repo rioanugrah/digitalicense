@@ -29,4 +29,14 @@ class Category extends Model
     {
         return $this->hasMany(\App\Models\Product::class, 'category_id');
     }
+
+    public function category_detail_list()
+    {
+        return $this->hasMany(\App\Models\CategoryDetail::class, 'category_id');
+    }
+
+    public function category_detail()
+    {
+        return $this->belongsTo(\App\Models\CategoryDetail::class, 'id');
+    }
 }

@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-xl-6">
                             <div class="mt-4 mt-xl-3">
-                                <a href="javascript: void(0);" class="text-primary">{{ $product->category->name }}</a>
+                                <a href="javascript: void(0);" class="text-primary">{{ $product->category->name.' - '.$product->category->category_detail->name }}</a>
                                 <h4 class="mt-1 mb-3">{{ $product->name }}</h4>
                                 <h5 class="mb-3">Stock :
                                     @if ($product->qty == 0)
