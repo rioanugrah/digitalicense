@@ -9,7 +9,8 @@
     </h3>
     @foreach ($categories->product as $product)
     <div class="col-xl-3 col-md-3">
-        <button class="card" onclick="window.location.href='{{ route('frontend.product_detail',['category' => $categories->slug,'slug' => $product->slug]) }}'">
+        {{-- <button class="card" onclick="window.location.href='{{ route('frontend.product_detail',['category' => $categories->slug,'slug' => $product->slug]) }}'"> --}}
+        <button class="card">
             <img class="card-img-top img-fluid" src="{{ asset('product_digital/'.$product->image) }}" alt="{{ $product->name }}">
             <div class="card-body">
                 <h4 class="card-title">{{ $product->name }}</h4>

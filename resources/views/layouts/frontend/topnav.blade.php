@@ -11,13 +11,20 @@
                         </button>
                     </li>
                     @php
-                        $menu_categories = \App\Models\Category::all();
+                        $menu_categories = \App\Models\Category::orderBy('created_at','asc')->get();
                     @endphp
                     @foreach ($menu_categories as $menu_category)
-                    <li class="nav-item">
+                    <li class="nav-item dropdown">
                         <button class="nav-link {{ request()->is('product/'.$menu_category->slug.'*') ? 'active' : '' }}" onclick="window.location.href='{{ route('frontend.product',['category' => $menu_category->slug]) }}'">
                             {{ $menu_category->name }}
                         </button>
+                        <div class="dropdown-menu" aria-labelledby="topnav-apps">
+                            @foreach ($menu_category->category_detail_list as $category_detail_list)
+                            <a onclick="window.location.href='{{ route('frontend.product_category',['category' => $menu_category->slug, 'category_id' => $category_detail_list->id]) }}'" class="dropdown-item">{{ $category_detail_list->name }}</a>
+                            @endforeach
+                            {{-- <a href="apps-chat" class="dropdown-item">Chat</a>
+                            <a href="apps-file-manager" class="dropdown-item">File Manager</a> --}}
+                        </div>
                     </li>
                     @endforeach
 

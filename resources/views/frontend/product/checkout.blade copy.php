@@ -4,8 +4,7 @@
 @endsection
 @section('content')
     <form
-        action="{{ route('frontend.product_checkout_buy', ['category' => $categories->slug_category, 'category_id' => $categories->category_id, 'slug' => $categories->slug_product]) }}"
-        {{-- action="#" --}}
+        action="{{ route('frontend.product_checkout_buy', ['category' => $categories->slug_category, 'slug' => $categories->slug_product]) }}"
         method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">

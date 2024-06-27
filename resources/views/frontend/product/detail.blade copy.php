@@ -17,11 +17,13 @@
                 <div class="card-body">
                     <h4 class="card-title">{{ $categories->name }}</h4>
                     <div class="mt-3 mb-3" style="font-weight: bold; font-size: 18pt">{{ 'Rp. '.number_format($categories->price,0,',','.') }}</div>
-                    <p>{{ $categories->slug_category.' '.$categories->category_id.' '.$categories->slug_product }}</p>
-                    <button class="btn btn-success" onclick="window.location.href='{{ !\Auth::check() ? route('login') : route('frontend.product_checkout',['category' => $categories->slug_category, 'category_id' => $categories->category_id, 'slug' => $categories->slug_product]) }}'"><i class="mdi mdi-cart"></i> Buy</button>
+                    <button class="btn btn-success" onclick="window.location.href='{{ !\Auth::check() ? route('login') : route('frontend.product_checkout',['category' => $categories->slug_category,'slug' => $categories->slug_product]) }}'"><i class="mdi mdi-cart"></i> Buy</button>
                     <p>{!! $categories->description !!}</p>
                 </div>
             </div>
         </div>
     </div>
+    {{-- <div class="row">
+        <p>{{ $categories->product_detail }}</p>
+    </div> --}}
 @endsection
