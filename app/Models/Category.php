@@ -37,6 +37,6 @@ class Category extends Model
 
     public function category_detail()
     {
-        return $this->belongsTo(\App\Models\CategoryDetail::class, 'category_id');
+        return $this->belongsTo(\App\Models\CategoryDetail::class, 'id', 'category_id');
     }
 }
