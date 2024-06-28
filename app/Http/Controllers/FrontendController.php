@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\CategoryDetail;
 use App\Models\Product;
 use App\Models\ProductDetail;
 use App\Models\Orders;
@@ -24,6 +25,7 @@ class FrontendController extends Controller
         Product $product,
         ProductDetail $product_detail,
         Category $category,
+        CategoryDetail $category_detail,
         Orders $orders,
         OrdersDetail $orders_detail
     ){
@@ -42,6 +44,7 @@ class FrontendController extends Controller
         $this->product = $product;
         $this->product_detail = $product_detail;
         $this->category = $category;
+        $this->category_detail = $category_detail;
         $this->orders = $orders;
         $this->orders_detail = $orders_detail;
     }
@@ -60,11 +63,16 @@ class FrontendController extends Controller
 
     public function product_category($category,$category_id)
     {
-        $data['categories'] = $this->category->with('category_detail_list')
-                                            ->whereHas('category_detail_list', function($cdl) use($category_id){
-                                                $cdl->where('category_id',$category_id);
-                                            })
+        // dd($category_id);
+        $data['categories'] = $this->category->where('slug',$category)
                                             ->first();
+        $data['products'] = $this->product->where('category_id',$data['categories']->id)
+                                        ->where('category_detail_id',$category_id)
+                                        ->get();
+        // $data['category_detail_list'] = $this->category_detail->where('category_id',$data['categories']->id)
+        //                                                     // ->where('category_detail_id',$category_id)
+        //                                                     ->get();
+                                            // dd($data);
         return view('frontend.product.category_product',$data);
     }
 

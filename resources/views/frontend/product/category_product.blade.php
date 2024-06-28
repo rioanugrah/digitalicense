@@ -5,9 +5,9 @@
 @section('content')
     <div class="row">
         <h3 class="col-xl-12 col-md-12 mb-3">
-            Product {{ $categories->name }}
+            {{-- Product {{ $categories->name }} --}}
         </h3>
-        @foreach ($categories->product as $product)
+        @foreach ($products as $product)
             <div class="col-xl-3 col-md-3">
                 <button class="card" onclick="window.location.href='{{ route('frontend.product_detail',['category' => $categories->slug, 'category_id' => $categories->category_detail->id, 'slug' => $product->slug]) }}'">
                 {{-- <button class="card"> --}}

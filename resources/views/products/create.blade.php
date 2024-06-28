@@ -78,11 +78,17 @@
                     </div>
                     <div class="mb-3">
                         <label for="">Category</label>
-                        <select name="category_id" class="form-control" id="">
+                        <select name="category_id" class="form-control" id="category_id">
                             <option value="">-- Select Category --</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="">Category Detail</label>
+                        <select name="category_detail_id" class="form-control" id="category_detail_id">
+                            <option value="">-- Select Category Detail --</option>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -152,6 +158,35 @@
             }else if($('#jenis_upload').val() == 'file') {
                 document.getElementById('hasil_jenis_upload').innerHTML = '<label for="">Upload File</label>'+'<input type="file" name="link_file" class="form-control">';
             }
+        });
+
+        $('#category_id').on('change', function(){
+            $.ajax({
+                type:'GET',
+                url: "{{ url('b/products/category_detail/') }}"+'/'+$('#category_id').val(),
+                contentType: false,
+                processData: false,
+                success: (result) => {
+                    // alert(result);
+                    if (result.success == true) {
+                        var category_detail_list = result.data.category_detail_list;
+                        var txt = "";
+                        category_detail_list.forEach(dataCategoryDetail);
+
+                        function dataCategoryDetail(value,index) {
+                            txt = txt+"<option value="+value.id+">"+value.name+"</option>";
+                        }
+
+                        // $('#category_detail_id').val(txt);
+                        document.getElementById('category_detail_id').innerHTML = txt;
+                    }else{
+                        document.getElementById('category_detail_id').innerHTML = '<option value="">-- Select Category Detail --</option>';
+                    }
+                },
+                error: function (request, status, error) {
+
+                }
+            });
         });
     </script>
     {{-- <script src="{{ URL::asset('assets/libs/choices.js/choices.js.min.js') }}"></script>
