@@ -40,27 +40,27 @@ class OrderController extends Controller
         return view('orders.detail',$data);
     }
 
-    // public function detail_input_license_simpan(Request $request,$order_code,$id)
-    // {
-    //     $rules = [
-    //         'product_license'  => 'required',
-    //     ];
+    public function detail_input_license_simpan(Request $request,$order_code,$id)
+    {
+        $rules = [
+            'product_license'  => 'required',
+        ];
 
-    //     $messages = [
-    //         'product_license.required'  => 'Product Key wajib diisi.',
-    //     ];
+        $messages = [
+            'product_license.required'  => 'Product Key wajib diisi.',
+        ];
 
-    //     $validator = Validator::make($request->all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules, $messages);
 
-    //     if ($validator->passes()) {
-    //         $orderDetail = $this->orders_detail->where('orders_id',$id)->first();
-    //         $orderDetail->product_license = $request->product_license;
-    //         $orderDetail->update();
+        if ($validator->passes()) {
+            $orderDetail = $this->orders_detail->where('orders_id',$id)->first();
+            $orderDetail->product_license = $request->product_license;
+            $orderDetail->update();
 
-    //         if ($orderDetail) {
-    //             return redirect()->route('orders.detail',['order_code' => $order_code, 'id' => $id])
-    //             ->with('success',$orderDetail->order_name.' Product Key successfully');
-    //         }
-    //     }
-    // }
+            if ($orderDetail) {
+                return redirect()->route('orders.detail',['order_code' => $order_code, 'id' => $id])
+                ->with('success',$orderDetail->order_name.' Product Key successfully');
+            }
+        }
+    }
 }
