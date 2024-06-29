@@ -102,17 +102,20 @@
                     @if ($order->status == 'Paid')
                     <h4 class="card-title mb-3">Download File</h4>
                     <div class="row">
-                        @if ($order->order_license->product_license != null)
+                        {{-- @if ($order->order_license->product_license != null)
                         <div class="col-md-3">
                             <div>License Key : {{ $order->order_license->product_license }}</div>
                         </div>
                         <div class="col-md-3">
                             <button class="btn btn-primary" onclick="window.location.href='{{ $order->order_license->product->link_file }}'">Download File</button>
                         </div>
-                        @endif
-                        {{-- <div class="col-md-3">
-                            {{ $order->order_license->product_license }}
-                        </div> --}}
+                        @endif --}}
+                        <div class="col-md-3">
+                            <div>License Key : {{ $order->order_license->product_license }}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-primary" onclick="window.location.href='{{ $order->order_license->product->link_file }}'">Download File</button>
+                        </div>
                     </div>
                     @endif
                     {{-- @if ($order->status == 'Paid')
