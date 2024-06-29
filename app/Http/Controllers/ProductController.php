@@ -13,7 +13,7 @@ use App\Models\ProductDetail;
 use App\Models\Category;
 use App\Models\Orders;
 use App\Models\OrdersDetail;
-
+use App\Models\OrderLicense;
 use App\Mail\NoReplyEmail;
 
 use \Carbon\Carbon;
@@ -30,7 +30,8 @@ class ProductController extends Controller
         ProductDetail $product_detail,
         Category $category,
         Orders $orders,
-        OrdersDetail $orders_detail
+        OrdersDetail $orders_detail,
+        OrderLicense $orders_license
     ){
         $this->middleware('permission:product-list', ['only' => ['index']]);
         $this->middleware('permission:product-create', ['only' => ['create','simpan']]);
@@ -43,6 +44,7 @@ class ProductController extends Controller
         $this->category = $category;
         $this->orders = $orders;
         $this->orders_detail = $orders_detail;
+        $this->orders_license = $orders_license;
     }
 
     public function index()
@@ -152,14 +154,14 @@ class ProductController extends Controller
 
             $product = $this->product->create($input);
 
-            for ($i=0; $i <= $request->qty ; $i++) {
-                $no_product_detail = $this->product_detail->max('id');
-                $this->product_detail->create([
-                    'id' => $no_product_detail+1,
-                    'product_id' => $input['id'],
-                    'status' => 'Open'
-                ]);
-            }
+            // for ($i=0; $i <= $request->qty ; $i++) {
+            //     $no_product_detail = $this->product_detail->max('id');
+            //     $this->product_detail->create([
+            //         'id' => $no_product_detail+1,
+            //         'product_id' => $input['id'],
+            //         'status' => 'Open'
+            //     ]);
+            // }
 
             if($product){
                 return redirect()->route('products')
@@ -353,7 +355,19 @@ class ProductController extends Controller
         if ($order) {
             $product->qty = $product->qty - 1;
             $product->update();
-
+            $noIdProductDetail = $this->product_detail->max('id');
+            if (empty($noIdProductDetail)) {
+                $no_id = 1;
+            }else{
+                $no_id = $noIdProductDetail+1;
+            }
+            $this->orders_license->create([
+                'id' => $no_id,
+                'order_id' => $input['id'],
+                'product_id' => $product->id,
+                'status' => 'Waiting',
+                'user_generate' => auth()->user()->generate
+            ]);
             // $input2['id'] = Str::uuid()->toString();
             // $input2['orders_id'] = $input['id'];
             // $input2['order_name'] = $product->name;

@@ -100,9 +100,25 @@
                         </tbody>
                     </table>
                     @if ($order->status == 'Paid')
+                    <h4 class="card-title mb-3">Download File</h4>
+                    <div class="row">
+                        @if ($order->order_license->product_license != null)
+                        <div class="col-md-3">
+                            <div>License Key : {{ $order->order_license->product_license }}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-primary" onclick="window.location.href='{{ $order->order_license->product->link_file }}'">Download File</button>
+                        </div>
+                        @endif
+                        {{-- <div class="col-md-3">
+                            {{ $order->order_license->product_license }}
+                        </div> --}}
+                    </div>
+                    @endif
+                    {{-- @if ($order->status == 'Paid')
                         @if (!$order->order_detail->isEmpty())
                         <hr>
-                        <h4 class="card-title mb-3">Product License</h4>
+                        <h4 class="card-title mb-3">Order Detail</h4>
                         <table class="table">
                             @foreach ($order->order_detail as $order_detail)
                             <tr>
@@ -110,10 +126,6 @@
                                 <td>:</td>
                                 <td>{!! $order_detail->product_license == null ? '-' : $order_detail->product_license !!}</td>
                                 @if (!empty($order_detail->product->link_file))
-                                    {{-- @if ($order_detail->product->link_file >= 'http')
-                                    <td><a href="{{ $order_detail->product->link_file }}" class="btn btn-primary"><i class="fas fa-download"></i> Download Link</a></td>
-                                    @else
-                                    @endif --}}
                                     <td><a href="{{ $order_detail->product->link_file }}" class="btn btn-primary"><i class="fas fa-download"></i> Download File</a></td>
                                 @endif
                                 @if ($cek_user->role_id == 1)
@@ -125,7 +137,6 @@
                                                 <input type="text" name="product_license" class="form-control" placeholder="Input Product Key">
                                             </div>
                                             <button type="submit" class="btn btn-primary">Submit</button>
-                                            {{-- <a href="#" class="btn btn-primary">Input License</a> --}}
                                         </form>
                                     </td>
                                     @endif
@@ -134,7 +145,7 @@
                             @endforeach
                         </table>
                         @endif
-                    @endif
+                    @endif --}}
                 </div>
                 <div class="card-footer">
                     <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>

@@ -30,6 +30,11 @@ class Orders extends Model
         return $this->belongsTo(\App\Models\User::class, 'user_generate','generate');
     }
 
+    public function order_license()
+    {
+        return $this->belongsTo(\App\Models\OrderLicense::class, 'id','order_id');
+    }
+
     public function order_detail()
     {
         return $this->hasMany(\App\Models\OrdersDetail::class, 'orders_id','id');

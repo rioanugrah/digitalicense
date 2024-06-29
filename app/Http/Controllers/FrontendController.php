@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\ProductDetail;
 use App\Models\Orders;
 use App\Models\OrdersDetail;
+use App\Models\OrderLicense;
 use \Carbon\Carbon;
 
 use App\Mail\NoReplyEmail;
@@ -27,7 +28,8 @@ class FrontendController extends Controller
         Category $category,
         CategoryDetail $category_detail,
         Orders $orders,
-        OrdersDetail $orders_detail
+        OrdersDetail $orders_detail,
+        OrderLicense $orders_license
     ){
         $this->tripay_payment = $tripay_payment;
         if (env('TRIPAY_IS_PRODUCTION') == false) {
@@ -47,6 +49,7 @@ class FrontendController extends Controller
         $this->category_detail = $category_detail;
         $this->orders = $orders;
         $this->orders_detail = $orders_detail;
+        $this->orders_license = $orders_license;
     }
 
     public function index()
@@ -175,7 +178,19 @@ class FrontendController extends Controller
         if ($order) {
             $product->qty = $product->qty - 1;
             $product->update();
-
+            $noIdProductDetail = $this->product_detail->max('id');
+            if (empty($noIdProductDetail)) {
+                $no_id = 1;
+            }else{
+                $no_id = $noIdProductDetail+1;
+            }
+            $this->orders_license->create([
+                'id' => $no_id,
+                'order_id' => $input['id'],
+                'product_id' => $product->id,
+                'status' => 'Waiting',
+                'user_generate' => auth()->user()->generate
+            ]);
             // $input2['id'] = Str::uuid()->toString();
             // $input2['orders_id'] = $input['id'];
             // $input2['order_name'] = $product->name;
