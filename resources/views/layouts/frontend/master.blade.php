@@ -9,11 +9,12 @@
     <meta name="author" content="Digital License">
     <meta name="description" content="@yield('description')">
     <meta name="theme-color" content="#00215E">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/icon.png') }}">
     <meta name="keywords" content="@yield('keywords')">
     <link rel="canonical" href="@yield('canonical')">
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
     <meta property="og:locale:alternate" content="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <meta property="og:type" content="Digital Product">
+    <meta property="og:type" content="Digital License">
     <meta property="og:title" content="@yield('title')">
     {{-- <meta property="og:url" content="{{ url('/') }}"> --}}
     <meta property="og:site_name" content="Digital License">

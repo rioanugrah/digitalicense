@@ -5,7 +5,7 @@
 @section('content')
     <div class="row">
         <h3 class="col-xl-12 col-md-12 mb-3">
-            {{-- Product {{ $categories->name }} --}}
+            Product {{ $categories->name }}
         </h3>
         @foreach ($products as $product)
             <div class="col-xl-3 col-md-3">
