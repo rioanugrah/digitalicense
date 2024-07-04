@@ -10,6 +10,7 @@
     <meta name="theme-color" content="#00215E">
     <meta name="keywords" content="@yield('keywords')">
     <link rel="canonical" href="@yield('canonical')">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/icon.png') }}">
     <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
     <meta property="og:locale:alternate" content="{{ str_replace('_', '-', app()->getLocale()) }}">
     <meta property="og:type" content="Digital Product">

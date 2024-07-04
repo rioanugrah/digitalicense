@@ -45,7 +45,7 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    @php
+                                    {{-- @php
                                         $model_has_role = \DB::table('model_has_roles')->select('role_id')->where('model_id',$user->id)->first();
                                         // dd($model_has_role->role_id);
                                         $roles = \DB::table('roles')->find($model_has_role->role_id);
@@ -60,12 +60,12 @@
                                             @break
                                         @default
 
-                                    @endswitch
-                                    {{-- @if (!empty($user->getRoleNames()))
+                                    @endswitch --}}
+                                    @if (!empty($user->getRoleNames()))
                                         @foreach ($user->getRoleNames() as $v)
                                             <label class="badge badge-success">{{ $v }}</label>
                                         @endforeach
-                                    @endif --}}
+                                    @endif
                                 </td>
                                 <td>
                                     <a class="btn btn-info" href="{{ route('users.show', $user->id) }}">Show</a>
