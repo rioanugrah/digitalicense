@@ -45,27 +45,24 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    {{-- @php
-                                        $model_has_role = \DB::table('model_has_roles')->select('role_id')->where('model_id',$user->id)->first();
-                                        // dd($model_has_role->role_id);
-                                        $roles = \DB::table('roles')->find($model_has_role->role_id);
-                                        // dd($roles);
-                                    @endphp
-                                    @switch($roles->name)
-                                        @case('Admin')
-                                            <span class="badge bg-primary">{{ $roles->name }}</span>
-                                            @break
-                                        @case('User')
-                                            <span class="badge bg-info">{{ $roles->name }}</span>
-                                            @break
-                                        @default
-
-                                    @endswitch --}}
-                                    @if (!empty($user->getRoleNames()))
+                                    @if (!empty($user->roles))
+                                        @foreach ($user->roles as $v)
+                                        @switch($v->name)
+                                            @case('Admin')
+                                                <span class="badge bg-info">{{ $v->name }}</span>
+                                                @break
+                                            @case('User')
+                                                <span class="badge bg-success">{{ $v->name }}</span>
+                                                @break
+                                            @default
+                                        @endswitch
+                                        @endforeach
+                                    @endif
+                                    {{-- @if (!empty($user->getRoleNames()))
                                         @foreach ($user->getRoleNames() as $v)
                                             <label class="badge badge-success">{{ $v }}</label>
                                         @endforeach
-                                    @endif
+                                    @endif --}}
                                 </td>
                                 <td>
                                     <a class="btn btn-info" href="{{ route('users.show', $user->id) }}">Show</a>
